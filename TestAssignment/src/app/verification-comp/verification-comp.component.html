@@ -1,0 +1,74 @@
+<div class="form-style-5">
+<div class="container"> 
+    <legend><span class="number"></span> Personal Loan Verification Form</legend>
+    <div></div>
+    <br>
+   <form #verificationForm="ngForm" (ngSubmit)="onFormSubmit(verificationForm)">
+
+       <div class="form-group">
+          <div class="row">
+              <input type="text" class="form-control" id="city" placeholder="Enter Current City" name="city" [(ngModel)]="city" required #myCity="ngModel">
+              <div *ngIf="myCity.invalid && (myCity.dirty || myCity.touched)" class="alert alert-danger">
+                <div *ngIf="myCity.errors.required"> City is required. </div>
+             </div>
+        </div>
+
+       </div>
+       
+       <div class="form-group">
+        <div class="row">
+            <input type="text" class="form-control" id="panNumber" placeholder="Enter PAN Number" name="panNumber" [(ngModel)]="panNumber" pattern="^[A-Za-z]{5}[0-9]{4}[A-Za-z]$" maxlength="10" #myPanNumber="ngModel">
+            
+            <div *ngIf="myPanNumber.invalid && (myPanNumber.dirty || myPanNumber.touched)" class="alert alert-danger">
+                <div *ngIf="myPanNumber.errors.required">  PAN Number is required </div>
+                <div *ngIf="myPanNumber.errors.pattern">   PAN Number is not in Valid Format </div>
+             </div>
+         </div>
+     </div>
+     
+     <div class="form-group">
+        <div class="row">
+           <input type="text" class="form-control" id="fullname" placeholder="Enter Full Name" name="fullname" [(ngModel)]='fullname' maxlength="140" #myFullname="ngModel">
+           <div *ngIf="myFullname.invalid && (myFullname.dirty || myFullname.touched)" class="alert alert-danger">
+            <div *ngIf="myFullname.errors.required">  Full Name is required </div>
+            <div *ngIf="myFullname.errors.maxlength">  Full Name is exceeding length </div>
+         </div>
+         
+         </div>
+     </div>
+       <div class="form-group">
+           <div class="row">
+            <input type="email" class="form-control" placeholder="Enter Email Id" name="email" maxlength="255" [(ngModel)]="email" #myEmail="ngModel" email required>
+            <div *ngIf="myEmail.invalid && (myEmail.dirty || myEmail.touched)" class="alert alert-danger">
+                <div *ngIf="myEmail.errors.required">  Email is required </div>
+                <div *ngIf="myEmail.errors.maxlength">  Email is exceeding length </div>
+                <div *ngIf="myEmail.errors.email">  Email is not in Valid Format </div>
+             </div>   
+            
+           </div>
+       </div>
+       
+       <div class ="form-group">
+           <div class="row">
+            <div class="prefixNo">+91</div>
+            <input type ="mobile" class="form-control"  style="display:inline-block; width: 92%" name='mobile' placeholder="Enter Your Mobile Number" [(ngModel)]='mobile' 
+                 required pattern="^((\\+91-?)|0)?[0-9]{10}$" #myMobile="ngModel" minlength="10" maxlength="10"> 
+            
+                 <div *ngIf="myMobile.invalid && (myMobile.dirty || myMobile.touched)" class="alert alert-danger">
+                    <div *ngIf="myMobile.errors.required">  Mobile Number is required </div>
+                    <div *ngIf="myMobile.errors.maxlength">  Mobile Numer is exceeding length </div>
+                    <div *ngIf="myMobile.errors.pattern">  Mobile Number is not in Valid Format </div>
+                    <div *ngIf="myMobile.errors.minlength"> Please check the Number of Digits  </div>
+                 </div>
+                
+            
+          </div>
+       </div>
+     
+       
+      
+   </form>   
+</div>
+<app-verification-child [mobile]="mobile" [fullname]="fullname" [email]="email" [city]="city" [panNumber]="panNumber" ></app-verification-child>
+
+</div>

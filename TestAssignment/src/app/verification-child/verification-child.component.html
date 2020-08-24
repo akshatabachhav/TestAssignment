@@ -1,0 +1,37 @@
+
+
+<div class="form-style-5">
+    <div class="container"> 
+    <!--
+    <b>Mobile Change Log</b>
+    <div *ngFor="let changeLog of allmobileChangeLogs">
+        {{changeLog}}
+    </div>
+    -->
+    <div *ngIf='isSuccessGetOtp'>
+        <!-- Enable OTP Field -->
+        <!-- Disable Resend OTP link for 3 min-->
+        <div class="form-group">
+            <div class="row">
+                <input type="otp" class="form-control" name='otp' (change)="verifyOTP()" [(ngModel)]='otp'  #myOtp="ngModel" maxlength="4">
+                <div *ngIf="myOtp.invalid && (myOtp.dirty || myOtp.touched)" class="alert alert-danger">
+                    <div *ngIf="myOtp.errors.type"> Not a Valid Data </div>
+                    <div *ngIf="myOtp.errors.maxlength"> OTP should not exceed 4 characters </div>
+                </div>
+                <div *ngIf='!enableResendLink'>
+                    <a href="#" disabled='disabled'>Resend OTP</a>
+                </div>
+                <div *ngIf='(enableResendLink && (changeCounter &lt;= 4))'>
+                    <a href="#" (click)="!!getOTP()">Resend OTP</a>
+                </div>
+                <div *ngIf="changeCounter > 4" class="alert alert-danger">
+                    Please retry after 1 hour!
+                </div>
+            </div>
+        </div>    
+
+        <div *ngIf='isSuccessVerifyOtp' class="alert alert-success">Thank you for verification {{fullname}}</div>
+    </div>
+   
+    </div>
+</div>
